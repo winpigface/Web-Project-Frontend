@@ -59,29 +59,29 @@ import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 const linksList = [
   {
-    title: 'Users',
+    title: 'Profile',
     caption: '',
-    icon: 'perm_identity',
-    link: 'admin/users'
+    icon: 'school',
+    link: 'dashboard/profile'
 
   },
   {
     title: 'Washing Machine',
     caption: '',
-    icon: 'local_laundry_service',
-    link: 'admin/washmachine'
+    icon: 'code',
+    link: 'dashboard/washmachine'
   },
   {
     title: 'Booking',
     caption: '',
-    icon: 'task_alt',
-    link: 'admin/booking'
+    icon: 'chat',
+    link: 'dashboard/booking'
   },
   {
     title: 'Report',
     caption: '',
     icon: 'record_voice_over',
-    link: 'admin/report'
+    link: 'dashboard/report'
   }
 ]
 export default defineComponent({
