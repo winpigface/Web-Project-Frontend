@@ -43,7 +43,7 @@
     </q-drawer> -->
 
     <q-page-container>
-      <router-view />
+      <!-- <router-view /> -->
     </q-page-container>
   </q-layout>
 </template>
@@ -56,7 +56,7 @@ const linksList = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
-    icon: 'school',
+    icon: 'search',
     link: 'https://quasar.dev'
   },
   {

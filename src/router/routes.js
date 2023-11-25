@@ -21,6 +21,19 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/admin',
+    component: () => import('layouts/AdminLayout.vue'),
+    children: [
+      { path: '/admin/users', component: () => import('pages/AdminUsers.vue') },
+      { path: '/admin/washmachine', component: () => import('pages/AdminWash.vue') },
+
+      { path: '/admin/booking', component: () => import('pages/AdminBooking.vue') },
+      { path: '/admin/report', component: () => import('pages/AdminReport.vue') }
+
+    ]
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it
