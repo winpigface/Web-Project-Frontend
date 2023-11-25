@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import { useStorage } from "@vueuse/core";
-export const useLoginUserStore = defineStore("loginuser", {
+export const useWashingMachineStore = defineStore("washing_machine", {
     state:()=>({
         washid: useStorage("washid", ""),
+        name: useStorage("name",""),
+        status: useStorage("status","")
 
 
     }),
@@ -13,6 +15,8 @@ export const useLoginUserStore = defineStore("loginuser", {
     actions:{
         clearStorage(){
             this.washid = ""
+            this.name = ""
+            this.status = ""
         }
     }
 });

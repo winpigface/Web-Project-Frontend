@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh Lpr fFf"> <!-- Be sure to play with the Layout demo on docs -->
+  <q-layout view="lHh Lpr lFf"> <!-- Be sure to play with the Layout demo on docs -->
 
     <!-- (Optional) The Header -->
     <q-header elevated>
@@ -22,7 +22,7 @@
     <!-- (Optional) A Drawer; you can add one more with side="right" or change this one's side -->
     <q-drawer
       v-model="leftDrawerOpen"
-      side="left"
+      show-if-above
       bordered
       class="bg-grey-2"
     >
@@ -82,6 +82,12 @@ const linksList = [
     caption: '',
     icon: 'record_voice_over',
     link: 'admin/report'
+  },
+  {
+    title: 'Logout',
+    caption: '',
+    icon: 'logout',
+    link: '/'
   }
 ]
 export default defineComponent({
