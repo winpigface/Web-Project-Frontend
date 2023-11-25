@@ -3,11 +3,6 @@ const routes = [
     path: "/",
     component: () => import("layouts/BeforeLogin.vue"),
     children: [
-<<<<<<< HEAD
-      { path: '', component: () => import('pages/IndexPage.vue') },
-
-    ]
-=======
       { path: "", component: () => import("pages/LoginPage.vue") },
       { path: "/signup", component: () => import("pages/SignupPage.vue") },
     ],
@@ -25,7 +20,6 @@ const routes = [
         component: () => import("pages/BookingPage.vue"),
       },
     ],
->>>>>>> f5ee6c87a901602b91f053e1419e04046f344baf
   },
   {
     path: '/admin',

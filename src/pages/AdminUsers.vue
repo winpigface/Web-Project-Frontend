@@ -110,7 +110,7 @@ export default defineComponent({
       options: [
         'user','admin'
       ],
-      Roleuser: ['asd']
+      Roleuser: []
     }
   },
   methods:{
