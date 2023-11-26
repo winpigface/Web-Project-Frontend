@@ -1,14 +1,201 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page padding>
 
-    <h1>Adminreport</h1>
+    <div v-if="dataready">
+      <q-table
+        title="Report"
+        :columns="columns"
+        :rows="rows"
+        row-key="id"
+        :pagination="paginations"
+      >
+
+      <template #body="props">
+          <q-tr :props="props">
+            <q-td key="id" :props="props"> {{ props.row.id }}</q-td>
+            <q-td key="reportdate" :props="props"> {{ props.row.reportdate }}</q-td>
+            <q-td key="washingmachine" :props="props"> {{ props.row.washingmachine }}</q-td>
+            <q-td key="username" :props="props"> {{ props.row.username }}</q-td>
+            <q-td key="phone" :props="props"> {{ props.row.phone }}</q-td>
+            <q-td key="redportlog" :props="props"> {{ props.row.reportlog }}</q-td>
+
+
+            <q-td key="action">
+              <q-btn
+                color="primary"
+                flat
+                round
+                icon="delete"
+                @click="deleteRecord(props.row)"
+              />
+            </q-td>
+          </q-tr>
+      <q-dialog v-model="form_delete" persistent>
+      <q-card class="dialog">
+        <q-card-section class="dialog_head delete">
+          <span class="q-ml-sm"><q-avatar icon="delete" color="primary" text-color="white" /></span> <h6>ID: {{ input.id }}</h6>
+
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" v-close-popup @click="onCancelDelete()" />
+          <q-btn flat label="Delete" color="primary" v-close-popup @click="onDelete(input.id)" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+        </template>
+      </q-table>
+    </div>
+    <div v-else>
+      <q-circular-progress
+        indeterminate
+        rounded
+        size="50px"
+        color="blue"
+        class="q-ma-md"
+      />
+    </div>
+
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-
+import {useLoginUserStore} from '../stores/LoginUser'
+import { Notify } from 'quasar'
 export default defineComponent({
-  name: 'AdminReport'
+  name: 'AdminReport',
+  data(){
+    return{
+      dataready: false,
+      rows: [],
+      columns: [
+        {
+          name: "id",
+          label: "ID",
+          field: "id",
+          align: "center",
+          sortable: true,
+        },
+        {
+          name: "reportdate",
+          label: "ReportDate",
+          field: "reportdate",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "washingmachine",
+          label: "Washing Machine",
+          field: "washingmachine",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "username",
+          label: "Username",
+          field: "username",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "phone",
+          label: "Phone",
+          field: "phone",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "reportlog",
+          label: "ReportLog",
+          field: "reportlog",
+          align: "left",
+          sortable: true,
+        },
+      ],
+      paginations: { rowsPerPage: 10 },
+      form_delete: false,
+      storeLogUser: useLoginUserStore(),
+    }
+  },
+  methods:{
+    getAllReport(){
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .get("/admin/report",{headers})
+      .then((res)=>{
+        if(res.status == 200){
+          this.rows = res.data
+        }
+      })
+      .catch((err) => {
+          console.log(err);
+          Notify.create({
+            type: "negative",
+            message: "Unauthorized",
+          });
+          this.$router.push('/')
+      });
+    },
+    // Delte report
+    deleteRecord(record){
+      this.input = record;
+      this.form_delete = true;
+    },
+    onCancelDelete(){
+      this.input = null
+      this.form_delete = false
+    },
+    onDelete(id){
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .delete('/admin/'+id,{headers})
+      .then((res)=>{
+        if(res.status == 200){
+          Notify.create({
+              type: "positive",
+              message: "Delete Report ID: " + id,
+            });
+            this.getAllReport()
+        }
+
+      })
+      .catch((err)=>{
+        Notify.create({
+              type: "negative",
+              message: "Error Delete Report ID: " + id,
+            });
+      })
+    }
+  },
+  async mounted(){
+    await this.getAllReport();
+    // console.log("token@mount:"+this.storeLogUser.accessToken)
+    this.dataready = true;
+  }
 })
 </script>
+<style  scoped>
+.dialog{
+ width: 300px;
+}
+.dialog_head{
+  height: 100px;
+  background-color: #1976D2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialog_head.edit{
+  background-color: #26A69A;
+}
+.dialog_head.delete{
+  background-color: red;
+}
+.dialog_head h6{
+  color: white;
+}
+</style>

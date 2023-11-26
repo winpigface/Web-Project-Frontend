@@ -1,31 +1,31 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page padding>
     <!-- <h1>AdminBooking</h1> -->
     <div v-if="dataready">
       <q-table
-        title="List of users"
+        title="List of Booking"
         :columns="columns"
         :rows="rows"
-        row-key="id"
+        row-key="washing_machine_name"
         :pagination="paginations"
       >
       <template #body="props">
           <q-tr :props="props">
-            <q-td key="washing_machine" :props="props"> {{ props.row.washing_machine }}</q-td>
+            <q-td key="washing_machine_name" :props="props"> {{ props.row.washing_machine_name }}</q-td>
             <q-td key="username" :props="props"> {{ props.row.username }}</q-td>
-            <q-td key="from" :props="props"> {{ props.row.from }}</q-td>
-            <q-td key="to" :props="props"> {{ props.row.to }}</q-td>
-            <q-td key="status" :props="props">{{ props.row.status }}
+            <q-td key="book_from" :props="props"> {{ props.row.book_from }}</q-td>
+            <q-td key="book_to" :props="props"> {{ props.row.book_to }}</q-td>
+            <q-td key="Status" :props="props" v-if="props.row.Status == 'wait'">
+              <q-chip color="orange" text-color="white"  label="Wait" />
+            </q-td>
+             <q-td key="Status" :props="props" v-if="props.row.Status == 'inuse'">
+              <q-chip color="red" text-color="white"  label="Inuse" />
+            </q-td>
+            <q-td key="Status" :props="props" v-if="props.row.Status == 'finish'">
+              <q-chip color="green" text-color="white"  label="Finish" />
             </q-td>
 
             <q-td key="action">
-              <q-btn
-                color="primary"
-                flat
-                round
-                icon="edit"
-                @click="editRecord(props.row)"
-              />
               <q-btn
                 color="primary"
                 flat
@@ -47,11 +47,27 @@
         class="q-ma-md"
       />
     </div>
+    <!-- delete dialog -->
+    <q-dialog v-model="form_delete" persistent>
+      <q-card class="dialog">
+        <q-card-section class="dialog_head delete">
+          <span class="q-ml-sm"><q-avatar icon="delete" color="primary" text-color="white" /></span> <h6>Name: {{ input.username }}</h6>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancel" color="primary" v-close-popup @click="onCancelDelete()" />
+          <q-btn flat label="Delete" color="primary" v-close-popup @click="onDelete(input.id)" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
+import { useLoginUserStore } from '../stores/LoginUser'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'AdminBooking',
@@ -61,9 +77,9 @@ export default defineComponent({
       rows: [],
       columns: [
       {
-          name: "washing_machine",
+          name: "washing_machine_name",
           label: "WashingMachine",
-          field: "washing_machine",
+          field: "washing_machine_name",
           align: "center",
           sortable: true,
         },
@@ -75,32 +91,107 @@ export default defineComponent({
           sortable: true,
         },
         {
-          name: "from",
+          name: "book_from",
           label: "From",
-          field: "from",
+          field: "book_from",
           align: "left",
           sortable: true,
         },
         {
-          name: "to",
+          name: "book_to",
           label: "To",
-          field: "username",
+          field: "book_to",
           align: "left",
           sortable: true,
         },
         {
-          name: "status",
+          name: "Status",
           label: "Status",
-          field: "status",
+          field: "Status",
           align: "left",
           sortable: true,
         }
       ],
-      storeLogUser: useLoginUserStore()
+      paginations: { rowsPerPage: 10 },
+      form_delete: false,
+      storeLogUser: useLoginUserStore(),
     }
   },
   methods:{
-
-  }
+    getAllBook(){
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .get("/admin/booking",{headers})
+      .then((res)=>{
+        if(res.status == 200){
+          console.log(res.data);
+          this.rows = res.data
+        }
+      })
+      .catch((err) => {
+          console.log(err);
+          Notify.create({
+            type: "negative",
+            message: "Unauthorized",
+          });
+          this.$router.push('/')
+      });
+    },
+      // Delte report
+    deleteRecord(record){
+      this.input = record;
+      this.form_delete = true;
+    },
+    onCancelDelete(){
+      this.input = null
+      this.form_delete = false
+    },
+    onDelete(id){
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .delete('/admin/booking/'+id,{headers})
+      .then((res)=>{
+        Notify.create({
+              type: "positive",
+              message: "Delete booking ID: " + id,
+            });
+      })
+      .catch((err)=>{
+        Notify.create({
+              type: "negative",
+              message: "Error Delete booking ID: " + id,
+            });
+      })
+    }
+  },
+  async mounted() {
+    await this.getAllBook();
+    this.dataready = true;
+  },
 })
 </script>
+<style  scoped>
+.dialog{
+ width: 300px;
+}
+.dialog_head{
+  height: 100px;
+  background-color: #1976D2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialog_head.edit{
+  background-color: #26A69A;
+}
+.dialog_head.delete{
+  background-color: red;
+}
+.dialog_head h6{
+  color: white;
+}
+</style>

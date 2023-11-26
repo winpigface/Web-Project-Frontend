@@ -8,9 +8,10 @@
           flat
           round
           dense
-          icon="menu"
           @click="toggleLeftDrawer"
-        />
+        >
+        <img src="../image/animation32.ico" alt="buttonpng" />
+        </q-btn>
 
         <q-toolbar-title>
           Admin Dashboard
@@ -62,7 +63,7 @@ const linksList = [
     title: 'Users',
     caption: '',
     icon: 'perm_identity',
-    link: 'admin/users'
+    link: 'admin'
 
   },
   {

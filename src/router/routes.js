@@ -25,7 +25,7 @@ const routes = [
     path: '/admin',
     component: () => import('layouts/AdminLayout.vue'),
     children: [
-      { path: '/admin/users', component: () => import('pages/AdminUsers.vue') },
+      { path: '/admin', component: () => import('pages/AdminUsers.vue') },
       { path: '/admin/washmachine', component: () => import('pages/AdminWash.vue') },
 
       { path: '/admin/booking', component: () => import('pages/AdminBooking.vue') },
