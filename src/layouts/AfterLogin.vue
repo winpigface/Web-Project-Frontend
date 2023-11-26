@@ -2,9 +2,9 @@
     <q-layout view="lHh Lpr lFf">
       <q-header elevated>
         <q-toolbar>
-        
-        <q-btn 
-          type="submit"  
+
+        <q-btn
+          type="submit"
           flat
           dense
           round
@@ -12,7 +12,7 @@
           @click="toggleLeftDrawer">
         <img src="../image/animation32.ico" alt="buttonpng" />
         </q-btn>
-        
+
 
         <q-toolbar-title>
           Laundry
@@ -21,7 +21,7 @@
         <div>Laundry v0.1</div>
       </q-toolbar>
       </q-header>
-  
+
       <q-drawer
         v-model="leftDrawerOpen"
         show-if-above
@@ -31,9 +31,9 @@
           <q-item-label
             header
           >
-            Essential Links
+            Menu
           </q-item-label>
-  
+
           <EssentialLink
             v-for="link in essentialLinks"
             :key="link.title"
@@ -41,55 +41,55 @@
           />
         </q-list>
       </q-drawer>
-  
+
       <q-page-container>
         <router-view />
       </q-page-container>
     </q-layout>
   </template>
-  
+
   <script>
   import { defineComponent, ref } from 'vue'
   import EssentialLink from 'components/EssentialLink.vue'
-  
+
   const linksList = [
     {
       title: 'My Profile',
-      caption: 'quasar.dev',
+      caption: '',
       icon: 'account_circle',
       link: 'https://quasar.dev'
     },
     {
       title: 'My wash',
-      caption: 'github.com/quasarframework',
+      caption: '',
       icon: 'local_laundry_service',
-      link: 'https://github.com/quasarframework'
+      link: '/laundry/mywash'
     },
     {
       title: 'Dashbord',
-      caption: 'chat.quasar.dev',
+      caption: '',
       icon: 'grid_view',
       link: '/laundry/dashbord'
     },
     {
       title: 'Logout',
-      caption: 'chat.quasar.dev',
+      caption: '',
       icon: 'logout',
       link: '/'
     },
-    
+
   ]
-  
+
   export default defineComponent({
     name: 'MainLayout',
-  
+
     components: {
       EssentialLink
     },
-  
+
     setup () {
       const leftDrawerOpen = ref(false)
-  
+
       return {
         essentialLinks: linksList,
         leftDrawerOpen,
@@ -100,4 +100,3 @@
     }
   })
   </script>
-  

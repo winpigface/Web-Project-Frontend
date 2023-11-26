@@ -40,7 +40,7 @@
 
 <script>
 import { defineComponent } from 'vue'
-import {useLoginUserStore} from '../../stores/LoginUser'
+import {useLoginUserStore} from '../stores/LoginUser'
 import {Notify} from 'quasar'
 export default defineComponent({
   name: 'AdminUsers',

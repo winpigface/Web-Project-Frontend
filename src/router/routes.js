@@ -19,6 +19,10 @@ const routes = [
         path: "/laundry/booking",
         component: () => import("pages/BookingPage.vue"),
       },
+      {
+        path: "/laundry/mywash",
+        component: () => import("pages/MywashPage.vue"),
+      },
     ],
   },
   {
