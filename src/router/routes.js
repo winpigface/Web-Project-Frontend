@@ -16,6 +16,10 @@ const routes = [
         component: () => import("pages/DashbordPage.vue"),
       },
       {
+        path: "/laundry/profile",
+        component: () => import("pages/UserProfilePage.vue"),
+      },
+      {
         path: "/laundry/booking",
         component: () => import("pages/BookingPage.vue"),
       },
