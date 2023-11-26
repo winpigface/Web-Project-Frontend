@@ -21,22 +21,23 @@
       "
     />
     <q-page-container class="bg-grey-2">
-      <q-page padding class="row items-center justify-center">
-        <div class="row full-width">
-          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm">
+      <q-page padding class="row items-center justify-center" >
+        <div class="row full-width" >
+          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm" style=" border: 1px solid black; ">
             <q-card
               flat
-              class="bg-white text-black"
-              style="border-radius: 30px"
+              class="bg-white text-black "
+              style="border-radius: 30px;  "
             >
-              <div class="row">
+              <div class="row text-center">
                 <!-- left box -->
-                <div
-                  class="col-md-6 col-xs-12 q-pa-md"
-                  style="border: 1px solid black"
+
+                  <div
+                  class="col-md-6 col-xs-12 q-pa-md "
+                  style=""
                 >
                   <q-img
-                    class="self-center"
+                    class=""
                     placeholder-src="../image/animation03.gif"
                     src="../image/animation03.gif"
                     spinner-color="white"
@@ -44,11 +45,11 @@
                       height: 200px;
                       width: 200px;
                       text-align: center;
-                      margin-left: 18%;
-                      margin-top: 20%;
-                    "
+                      margin-top: 8%;"
                   ></q-img>
                 </div>
+
+
 
                 <!-- right box -->
                 <div class="col-md-6 col-xs-12" style="margin-left: auto">
@@ -170,3 +171,7 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+
+</style>
