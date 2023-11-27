@@ -7,7 +7,7 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const RESTapi = 'https://web-project-backend-1ef2.vercel.app/api'
+const RESTapi = 'https://web-project-backend-j6ur.vercel.app/api'
 
 const api = axios.create({ baseURL: RESTapi,
 headers:{

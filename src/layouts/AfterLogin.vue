@@ -72,7 +72,7 @@ import { useLoginUserStore } from "src/stores/LoginUser";
       title: 'Dashbord',
       caption: '',
       icon: 'grid_view',
-      link: '/laundry/dashbord'
+      link: '/laundry/dashboard'
     },
     {
       title: 'Logout',

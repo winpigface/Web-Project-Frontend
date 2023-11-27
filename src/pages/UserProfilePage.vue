@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <q-page padding class="text-center">
     <div >
       <q-icon name="account_circle" size="100px"/>
@@ -15,11 +14,6 @@
     <div class="q-pa-sm">
       <q-btn color="primary" label="save change"  @click="onEdit(this.storeLogUser.userid,this.storeLogUser.username,this.storeLogUser.phone)"/>
       <!-- this.storeLogUser.userid,this.storeLogUser.email,this.storeLogUser.phone -->
-=======
-  <q-page padding>
-    <div>
-
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
     </div>
   </q-page>
 </template>
@@ -28,6 +22,7 @@
 import { defineComponent } from 'vue'
 import { useLoginUserStore } from 'src/stores/LoginUser';
 import { Notify } from 'quasar';
+import { ErrorHandle } from 'src/utils/ErrorHandle';
 export default defineComponent({
   name: 'UserProfilePage',
   data(){
@@ -60,12 +55,7 @@ export default defineComponent({
           }
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Updated user ID: " + err.message,
-            });
-            console.log(id+username+phone);
-
+        ErrorHandle(err.response.status,err,this.$router)
       })
     },
 

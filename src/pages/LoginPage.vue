@@ -152,7 +152,7 @@ export default defineComponent({
             this.storeLogUser.role = res.data.role;
             this.storeLogUser.accessToken = res.data.accessToken;
             if (this.storeLogUser.role == "user") {
-              this.$router.push("/laundry/dashbord");
+              this.$router.push("/laundry/dashboard");
             } else if (this.storeLogUser.role == "admin") {
               this.$router.push("/admin");
             }

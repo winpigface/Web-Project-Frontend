@@ -12,7 +12,7 @@ const routes = [
     component: () => import("layouts/AfterLogin.vue"),
     children: [
       {
-        path: "/laundry/dashbord",
+        path: "/laundry/dashboard",
         component: () => import("pages/DashbordPage.vue"),
       },
       {
@@ -23,7 +23,6 @@ const routes = [
         path: "/laundry/booking",
         component: () => import("pages/BookingPage.vue"),
       },
-<<<<<<< HEAD
       {
         path: "/laundry/mywash",
         component: () => import("pages/MywashPage.vue"),
@@ -32,12 +31,6 @@ const routes = [
         path: "/laundry/time",
         component: () => import("pages/time.vue"),
       },
-=======
-      // {
-      //   path: "/laundry/mywash",
-      //   component: () => import("pages/MywashPage.vue"),
-      // },
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
     ],
   },
   {

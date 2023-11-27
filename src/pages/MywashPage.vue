@@ -1,69 +1,48 @@
-<template class="temp">
-   <img
-    src="../image/backgound v.2.png"
-    alt=""
-    style="
-      pointer-events: none;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      filter: blur(5px);
-      margin-left: -2px;
-    "
-  />
-  <q-page>
-    <h1 id="current-time"></h1>
+<template >
+
+  <q-page class="page" padding>
+    <div class="box">
+
     <div class="boxmain q-pa-md " flat bordered v-if="this.wash.length !== 0">
       <!-- box0 -->
-      <div class="box0" >
+      <h3 id="current-time"></h3>
+      <div class="boxshowStatus" >
         <div class="temp" v-if="this.wash[0].Status == 'wait'">
-          <h1 class="font">wait</h1>
+          <h2 class="font">Wait</h2>
         </div>
         <div class="temp" v-if="this.wash[0].Status == 'inuse'">
-          <h1 class="font">using</h1>
+          <h2 class="font">Using</h2>
         </div>
         <div class="temp" v-if="this.wash[0].Status == 'finish'">
-          <h1 class="font">finish</h1>
+          <h2 class="font">Finish</h2>
         </div>
       </div>
       <!-- box1 -->
-      <div class="box1" v-if="this.wash[0].Status == 'wait'">
+      <div class="boxShowtime" v-if="this.wash[0].Status == 'wait'">
         <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_from }}</h1>
       </div>
-      <div class="box1" v-if="this.wash[0].Status == 'inuse'">
+      <div class="boxShowtime" v-if="this.wash[0].Status == 'inuse'">
         <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_to }}</h1>
       </div>
-      <div class="box1" v-if="this.wash[0].Status == 'finish'">
+      <div class="boxShowtime" v-if="this.wash[0].Status == 'finish'">
         <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >finish</h1>
       </div>
       <!-- box2 -->
-      <div class="box2">
-        <div class="item1">
-
-        </div>
-        <div class="item2 text-right" v-if="this.wash[0].Status == 'wait' && this.wash[0].book_from == this.wash[0].book_from">
-          <q-btn push color="red" label="cacel" style="margin-right: 20px;"/>
-          <q-btn push color="primary" label="confirm" />
-        </div>
-        <div class="item2 text-right" v-else-if="this.wash[0].Status == 'inuse'">
-
+      <div class="boxButton">
+        <div class="item2 text-right" v-if="this.wash[0].Status == 'wait'">
+          <q-btn push color="red" label="cacel" style="margin-right: 20px;" @click="cancelWash"/>
+            <q-btn push color="primary" label="Confirm Wash"  @click="onConfirmWash"/>
         </div>
         <div class="item2 text-right" v-else-if="this.wash[0].Status == 'finish' && this.wash[0].book_to == this.wash[0].book_to">
+            <q-btn push color="primary" label="Confirm Finish" @click="onConfirmFinish"/>
           <q-btn push color="primary" label="finish" />
         </div>
       </div>
     </div>
-
     <!-- table else -->
-    <div class="boxmain q-pa-md " flat bordered v-else>
-      <div class="box0" >
-        <div>
-
-        </div>
-      </div>
-
+    <div class="boxmain  " flat bordered v-else>
       <div class="box1" >
-        <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >Empty</h1>
+        <h1 class="text-center" style="font-weight: bold;" >Empty</h1>
       </div>
 
       <div class="box2">
@@ -75,6 +54,10 @@
         </div>
       </div>
     </div>
+    </div>
+
+
+
 
   </q-page>
 
@@ -85,9 +68,9 @@
 
 <script>
 import { defineComponent } from "vue";
-import { Notify } from "quasar";
 import { useLoginUserStore } from '../stores/LoginUser'
-
+import { ErrorHandle } from "src/utils/ErrorHandle";
+import { Notify } from "quasar";
 setInterval(()=>{
 let time = document.getElementById("current-time");
 
@@ -119,80 +102,113 @@ export default defineComponent({
           this.wash = res.data
           const event = new Date();
           console.log(event.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" ,hour12: false }));
-          //console.log(this.wash[0].book_from);
-
-          //console.log(d.toLocaleTimeString());
         }
       })
       .catch((err) => {
-          console.log(err);
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
       });
     },
 
-    onSubmit() {
-
+    onConfirmWash() {
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .put("/dashboard/comfirmwash",{headers})
+      .then((res)=>{
+        Notify.create({
+              type: "positive",
+              message: "Confirm Wash sucessfully",
+            });
+      })
+      .catch((err) => {
+        ErrorHandle(err.response.status,err,this.$router)
+      });
     },
-    onReset() {
-      this.email = null;
-      this.password = null;
+    onConfirmFinish(){
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .put("/dashboard/comfirmfinish",{headers})
+      .then((res)=>{
+        Notify.create({
+              type: "positive",
+              message: "Confirm Finish sucessfully",
+            });
+      })
+      .catch((err) => {
+        ErrorHandle(err.response.status,err,this.$router)
+      });
+    },
+    cancelWash() {
+      const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
+      this.$api
+      .delete("/dashboard",{headers})
+      .then((res)=>{
+        Notify.create({
+              type: "positive",
+              message: "Delete sucessfully",
+            });
+      })
+      .catch((err) => {
+        ErrorHandle(err.response.status,err,this.$router)
+      });
     },
   },
   async mounted() {
     await this.mywash();
-    //console.log("token@mount:"+this.storeLogUser.accessToken)
+
     this.dataready = true;
   },
 });
 </script>
 
 <style scoped>
-  .temp{
-    margin-top: -65px;
 
-    display: flex;
-    justify-content: center;
-  }
+#current-time{
+  position: absolute;
+  right: 5%;
+}
+.page{
+  background-color: #74dde4;
+  border: 1px solid brown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .font{
+.font{
     font-weight: bold;
-  }
+}
 
   .boxmain{
-    width: 1000px;
-    height: 600px;
-    /* border: 1px solid; */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    grid-template-columns: auto;
-    grid-template-rows: 100px 370px 100px;
-    gap: 0px;
-    /* background-color: #2196F3; */
-    /* padding: 10px; */
-    display: grid;
-    padding: 10px;
-
+    background-color: #ffffff;
+    display: block;
+    position: relative;
+    text-align: center;
+    text-anchor: start;
   }
 
-  .box0{
+  .boxshowStatus{
     /* border: 1px solid green; */
+    width: 20%;
+    text-align: center;
     background-color:  #2196F3;
-
-
   }
-  .box1{
+  .boxShowtime{
     /* border: 1px solid red; */
     background-color: #ffffff;
+    text-align: center;
+    width: 50%;
+    /* display: flex; */
 
   }
+.boxButton{
 
+}
   .box2{
     /* border: 1px solid; */
     top: 50%;
@@ -207,17 +223,6 @@ export default defineComponent({
     padding: 10px;
   }
 
-  .item1 {
 
-    /* border: 1px solid black; */
-  }
-  .item2 {
-
-    /* border: 1px solid black; */
-  }
-
-  *{
-    /* border: 1px solid black; */
-  }
 
 </style>
