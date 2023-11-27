@@ -90,7 +90,6 @@ export default defineComponent({
       })
       .catch((err)=>{
         ErrorHandle(err.response.status,err,this.$router)
-
       }
 
       )

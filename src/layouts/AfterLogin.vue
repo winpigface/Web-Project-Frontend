@@ -18,7 +18,7 @@
           Laundry
         </q-toolbar-title>
         <div v-if="storeLogUser.getUserid">
-         <a href="laundry/profile" style="text-decoration: none; color: wheat; font-size: 20px; font-weight: bold;">{{ storeLogUser.getUsername }}</a>
+         <router-link to="laundry/profile" style="text-decoration: none; color: wheat; font-size: 20px; font-weight: bold;">{{ storeLogUser.getUsername }}</router-link>
         </div>
       </q-toolbar>
       </q-header>
@@ -54,6 +54,8 @@
   import { defineComponent, ref } from 'vue'
   import EssentialLink from 'components/EssentialLink.vue'
 import { useLoginUserStore } from "src/stores/LoginUser";
+import { Notify } from 'quasar';
+
 
   const linksList = [
     {
@@ -110,7 +112,7 @@ import { useLoginUserStore } from "src/stores/LoginUser";
         type: "info",
         message: "Logout successfully"
       });
-      this.$router.push(link)
+      this.$router.push('/')
       }
       else this.$router.push('/laundry'+link)
     }

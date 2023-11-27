@@ -13,11 +13,11 @@
       <template #body="props">
           <q-tr :props="props">
             <q-td key="id" :props="props"> {{ props.row.id }}</q-td>
-            <q-td key="reportdate" :props="props"> {{ props.row.reportdate }}</q-td>
-            <q-td key="washingmachine" :props="props"> {{ props.row.washingmachine }}</q-td>
+            <q-td key="report_date" :props="props"> {{ props.row.report_date }}</q-td>
+            <q-td key="name" :props="props"> {{ props.row.name }}</q-td>
             <q-td key="username" :props="props"> {{ props.row.username }}</q-td>
             <q-td key="phone" :props="props"> {{ props.row.phone }}</q-td>
-            <q-td key="redportlog" :props="props"> {{ props.row.reportlog }}</q-td>
+            <q-td key="report_log" :props="props"> {{ props.row.report_log }}</q-td>
 
 
             <q-td key="action">
@@ -79,16 +79,16 @@ export default defineComponent({
           sortable: true,
         },
         {
-          name: "reportdate",
+          name: "report_date",
           label: "ReportDate",
-          field: "reportdate",
+          field: "report_date",
           align: "left",
           sortable: true,
         },
         {
-          name: "washingmachine",
+          name: "name",
           label: "Washing Machine",
-          field: "washingmachine",
+          field: "name",
           align: "left",
           sortable: true,
         },
@@ -107,9 +107,9 @@ export default defineComponent({
           sortable: true,
         },
         {
-          name: "reportlog",
+          name: "report_log",
           label: "ReportLog",
-          field: "reportlog",
+          field: "report_log",
           align: "left",
           sortable: true,
         },
@@ -129,6 +129,7 @@ export default defineComponent({
       .then((res)=>{
         if(res.status == 200){
           this.rows = res.data
+          console.log(res.data);
         }
       })
       .catch((err) => {

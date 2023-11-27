@@ -16,8 +16,8 @@
         <q-toolbar-title>
           Admin Dashboard
         </q-toolbar-title>
-        <div v-if="storeLogUser.getUserid">
-          Hello {{ storeLogUser.getUsername }}
+        <div v-if="storeLogUser.getUserid" style="text-decoration: none; color: wheat; font-size: 20px; font-weight: bold;">
+          {{ storeLogUser.getUsername }}
         </div>
       </q-toolbar>
     </q-header>
@@ -63,7 +63,7 @@
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { useLoginUserStore } from "src/stores/LoginUser";
-
+import { Notify } from 'quasar';
 const linksList = [
   {
     title: 'Users',
@@ -123,7 +123,7 @@ export default defineComponent({
         type: "info",
         message: "Logout successfully"
       });
-      this.$router.push(link)
+      this.$router.push('/')
       }
       else this.$router.push('/admin'+link)
     }

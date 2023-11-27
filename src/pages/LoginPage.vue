@@ -23,7 +23,7 @@
     <q-page-container class="bg-grey-2">
       <q-page padding class="row items-center justify-center" >
         <div class="row full-width" >
-          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm" style=" border: 1px solid black; ">
+          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm">
             <q-card
               flat
               class="bg-white text-black "
@@ -170,6 +170,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
 
-</style>
