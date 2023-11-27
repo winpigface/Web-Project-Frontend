@@ -1,8 +1,13 @@
 <template>
+
   <router-link
     clickable
-    to="link"
+    to= link
     >
+   <q-item
+    :href="link"
+    to="link"
+  >
    <q-item-section
       v-if="icon"
       avatar
@@ -14,8 +19,10 @@
       <q-item-label>{{ title }}</q-item-label>
       <q-item-label caption>{{ caption }}</q-item-label>
     </q-item-section>
-  </router-link>
+  </q-item>
 
+
+  </router-link>
 
 </template>
 
