@@ -133,10 +133,10 @@
 import { defineComponent } from 'vue'
 import { useLoginUserStore } from '../stores/LoginUser'
 import { Notify } from 'quasar'
+import {ErrorHandle} from '../utils/ErrorHandle'
+
 export default defineComponent({
   name: 'AdminWash',
-
-
 
   data(){
     return{
@@ -175,7 +175,6 @@ export default defineComponent({
   },
   methods:{
     getAllWash(){
-
       const headers = {
         "x-access-token": this.storeLogUser.accessToken
       }
@@ -187,11 +186,8 @@ export default defineComponent({
         }
       })
       .catch((err) => {
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
+
       });
     },
     // add new wash
@@ -217,11 +213,7 @@ export default defineComponent({
         }
       })
       .catch((err) => {
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
       });
     },
     // on Edit
@@ -241,7 +233,6 @@ export default defineComponent({
       .put('/admin/wash/'+id,data,{headers})
       .then((res)=>{
         if (res.status == 200) {
-
             Notify.create({
               type: "positive",
               message: "Updated Washing Machine ID: " + id,
@@ -250,10 +241,7 @@ export default defineComponent({
           }
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: err.message,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
       })
     },
     // Delete
@@ -279,20 +267,15 @@ export default defineComponent({
             });
             this.getAllWash()
         }
-
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: err.message,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
       })
   },
 },
   async mounted()
   {
     await this.getAllWash();
-    console.log("token@mount:"+this.storeLogUser.accessToken)
     this.dataready = true;
   },
 
