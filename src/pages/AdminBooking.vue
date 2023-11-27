@@ -1,6 +1,5 @@
 <template>
   <q-page padding>
-    <!-- <h1>AdminBooking</h1> -->
     <div v-if="dataready">
       <q-table
         title="List of Booking"
@@ -55,7 +54,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Cancel" color="primary" v-close-popup @click="onCancelDelete()" />
-          <q-btn flat label="Delete" color="primary" v-close-popup @click="onDelete(input.id)" />
+          <q-btn flat label="Delete" color="primary" v-close-popup @click="onDelete(input.username)" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -68,7 +67,7 @@
 import { defineComponent } from 'vue'
 import { useLoginUserStore } from '../stores/LoginUser'
 import { Notify } from 'quasar'
-
+import { ErrorHandle } from 'src/utils/ErrorHandle'
 export default defineComponent({
   name: 'AdminBooking',
   data(){
@@ -126,17 +125,12 @@ export default defineComponent({
       .get("/admin/booking",{headers})
       .then((res)=>{
         if(res.status == 200){
-          console.log(res.data);
           this.rows = res.data
         }
       })
       .catch((err) => {
-          console.log(err);
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
+
       });
     },
       // Delte report
@@ -148,23 +142,22 @@ export default defineComponent({
       this.input = null
       this.form_delete = false
     },
-    onDelete(id){
+    onDelete(username){
       const headers = {
         "x-access-token": this.storeLogUser.accessToken
       }
       this.$api
-      .delete('/admin/booking/'+id,{headers})
+      .delete('/admin/booking/delete/'+username,{headers})
       .then((res)=>{
         Notify.create({
               type: "positive",
-              message: "Delete booking ID: " + id,
+              message: "Delete booking ID: " + username,
             });
+        this.getAllBook();
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Delete booking ID: " + id,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
+
       })
     }
   },

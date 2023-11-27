@@ -29,28 +29,8 @@
   </template>
 
   <script>
-  import { defineComponent, ref } from 'vue'
-  // import EssentialLink from 'components/EssentialLink.vue'
-
-
-
+  import { defineComponent } from 'vue'
   export default defineComponent({
     name: 'MainLayout',
-
-    components: {
-
-    },
-
-    setup () {
-      const leftDrawerOpen = ref(false)
-
-      return {
-
-        leftDrawerOpen,
-        toggleLeftDrawer () {
-          leftDrawerOpen.value = !leftDrawerOpen.value
-        }
-      }
-    }
   })
   </script>

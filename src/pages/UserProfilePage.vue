@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <div >
-asdsa
+    <div>
+
     </div>
   </q-page>
 </template>

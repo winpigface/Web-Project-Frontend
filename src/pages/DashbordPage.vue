@@ -34,19 +34,21 @@
         <q-space />
 
         <q-btn
+          :key="WashMachine.id"
           color="grey"
           round
           flat
           dense
-          :icon="expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-          @click="expanded = !expanded"
+          :icon="WashMachine.id ? 'keyboard_arrow_down' : 'keyboard_arrow_up'"
+          @click="WashMachine.id =! WashMachine.id"
         />
       </q-card-actions>
 
       <q-slide-transition>
-        <div v-show="expanded">
+        <div v-show="!WashMachine.id" style="background-color: rgb(251,236,204);">
           <q-separator />
-          <q-card-section class="text-subtitle2">
+          <q-card-section class="text-subtitle2" >
+            <span>User :</span>
             {{ WashMachine.username }}
           </q-card-section>
         </div>
@@ -61,7 +63,6 @@
 
 <script>
 import { defineComponent } from "vue";
-import { Notify } from "quasar";
 import { useLoginUserStore } from "src/stores/LoginUser";
 import {useWashingMachineStore} from "src/stores/WashingMachine"
 import {ErrorHandle} from '../utils/ErrorHandle'

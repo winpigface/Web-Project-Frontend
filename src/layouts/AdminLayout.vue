@@ -16,6 +16,9 @@
         <q-toolbar-title>
           Admin Dashboard
         </q-toolbar-title>
+        <div v-if="storeLogUser.getUserid">
+          Hello {{ storeLogUser.getUsername }}
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -42,6 +45,7 @@
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
+          @click="onDel(link.title)"
         />
     </q-list>
 
@@ -58,6 +62,8 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useLoginUserStore } from "src/stores/LoginUser";
+
 const linksList = [
   {
     title: 'Users',
@@ -98,14 +104,28 @@ export default defineComponent({
   },
   setup () {
     const leftDrawerOpen = ref(false)
+    const storeLogUser = useLoginUserStore()
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      },
+      storeLogUser
+    }
+  },
+  methods:{
+    onDel(link){
+      if(link == 'Logout'){
+        this.storeLogUser.clearStorage();
+        Notify.create({
+        type: "info",
+        message: "Logout successfully"
+      });
       }
     }
   }
+
 })
 </script>

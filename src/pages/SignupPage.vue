@@ -159,7 +159,6 @@ export default defineComponent({
   },
   methods: {
     onSubmit() {
-      console.log("aaaaaaaaaaaaaaaaaaaaa");
       const data = {
         email: this.email,
         password: this.password,
@@ -179,10 +178,7 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-          Notify.create({
-            type: "negative",
-            message: "Can not create an account",
-          });
+          ErrorHandle(err.response.status,err,this.$router)
         });
     },
     onReset() {
