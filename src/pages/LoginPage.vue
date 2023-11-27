@@ -102,7 +102,7 @@
                       </div>
                       <div>
                         You don't have an account yet?
-                        <a href="/signup">create a new account</a>
+                        <router-link to="/signup">create a new account</router-link>
                       </div>
                     </q-form>
                   </div>
