@@ -62,6 +62,8 @@
 import { defineComponent } from 'vue'
 import {useLoginUserStore} from '../stores/LoginUser'
 import { Notify } from 'quasar'
+import {ErrorHandle} from '../utils/ErrorHandle'
+
 export default defineComponent({
   name: 'AdminReport',
   data(){
@@ -130,12 +132,7 @@ export default defineComponent({
         }
       })
       .catch((err) => {
-          console.log(err);
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
       });
     },
     // Delte report
@@ -164,21 +161,18 @@ export default defineComponent({
 
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Delete Report ID: " + id,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
+
       })
     }
   },
   async mounted(){
     await this.getAllReport();
-    // console.log("token@mount:"+this.storeLogUser.accessToken)
     this.dataready = true;
   }
 })
 </script>
-<style  scoped>
+<style scoped>
 .dialog{
  width: 300px;
 }

@@ -23,6 +23,7 @@ const routes = [
         path: "/laundry/booking",
         component: () => import("pages/BookingPage.vue"),
       },
+<<<<<<< HEAD
       {
         path: "/laundry/mywash",
         component: () => import("pages/MywashPage.vue"),
@@ -31,6 +32,12 @@ const routes = [
         path: "/laundry/time",
         component: () => import("pages/time.vue"),
       },
+=======
+      // {
+      //   path: "/laundry/mywash",
+      //   component: () => import("pages/MywashPage.vue"),
+      // },
+>>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
     ],
   },
   {

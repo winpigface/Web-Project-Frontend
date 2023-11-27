@@ -120,6 +120,8 @@
 import { defineComponent } from "vue";
 import { Notify } from "quasar";
 import { useLoginUserStore } from "src/stores/LoginUser";
+import {ErrorHandle} from '../utils/ErrorHandle'
+
 export default defineComponent({
   name: "LoginPage",
   data() {
@@ -157,11 +159,7 @@ export default defineComponent({
           }
         })
         .catch((err) => {
-
-          Notify.create({
-            type: "negative",
-            message: "Invalid email or password",
-          });
+          ErrorHandle(err.response.status,err,this.$router)
         });
     },
     onReset() {

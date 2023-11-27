@@ -132,6 +132,8 @@
 import { defineComponent } from 'vue'
 import {useLoginUserStore} from '../stores/LoginUser'
 import {Notify} from 'quasar'
+import {ErrorHandle} from '../utils/ErrorHandle'
+
 export default defineComponent({
   name: 'AdminUsers',
   data(){
@@ -208,12 +210,7 @@ export default defineComponent({
         }
       })
       .catch((err) => {
-          console.log(err);
-          Notify.create({
-            type: "negative",
-            message: "Unauthorized",
-          });
-          this.$router.push('/')
+        ErrorHandle(err.response.status,err,this.$router)
       });
     },
     // Edit user
@@ -247,10 +244,8 @@ export default defineComponent({
           }
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Updated user ID: " + id,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
+
       })
     },
     // Delete user
@@ -280,10 +275,7 @@ export default defineComponent({
 
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Delete user ID: " + id,
-            });
+        ErrorHandle(err.response.status,err,this.$router)
       })
     }
   },
