@@ -69,7 +69,7 @@ const linksList = [
     title: 'Users',
     caption: '',
     icon: 'perm_identity',
-    link: ''
+    link: '/'
 
   },
   {
@@ -125,7 +125,7 @@ export default defineComponent({
       });
       this.$router.push(link)
       }
-      else this.$router.push(link)
+      else this.$router.push('/admin'+link)
     }
   }
 

@@ -112,7 +112,7 @@ import { useLoginUserStore } from "src/stores/LoginUser";
       });
       this.$router.push(link)
       }
-      else this.$router.push(link)
+      else this.$router.push('/laundry'+link)
     }
   }
   })
