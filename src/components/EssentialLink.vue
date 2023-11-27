@@ -3,7 +3,6 @@
 
    <q-item
    clickable
-    :href="this.$router.push(link)"
   >
    <q-item-section
       v-if="icon"
@@ -47,6 +46,6 @@ export default defineComponent({
       type: String,
       default: ''
     }
-  }
+  },
 })
 </script>

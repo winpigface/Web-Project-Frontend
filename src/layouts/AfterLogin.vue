@@ -39,7 +39,7 @@
             v-for="link in essentialLinks"
             :key="link.title"
             v-bind="link"
-            @click="onDel(link.title)"
+            @click="onPath(link.title,link.link)"
           />
         </q-list>
       </q-drawer>
@@ -103,14 +103,16 @@ import { useLoginUserStore } from "src/stores/LoginUser";
       }
     },
   methods:{
-    onDel(link){
-      if(link === 'Logout'){
+    onPath(name,link){
+      if(name == 'Logout'){
         this.storeLogUser.clearStorage();
         Notify.create({
         type: "info",
         message: "Logout successfully"
       });
+      this.$router.push(link)
       }
+      else this.$router.push(link)
     }
   }
   })
