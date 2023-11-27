@@ -1,12 +1,9 @@
 <template>
 
-  <router-link
-    clickable
-    to= link
-    >
+
    <q-item
-    :href="link"
-    to="link"
+   clickable
+    :href="this.$router.push(link)"
   >
    <q-item-section
       v-if="icon"
@@ -22,7 +19,6 @@
   </q-item>
 
 
-  </router-link>
 
 </template>
 
