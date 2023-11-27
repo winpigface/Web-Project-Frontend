@@ -60,19 +60,19 @@ import { useLoginUserStore } from "src/stores/LoginUser";
       title: 'My Profile',
       caption: '',
       icon: 'account_circle',
-      link: '/laundry/profile'
+      link: '/profile'
     },
     {
       title: 'My wash',
       caption: '',
       icon: 'local_laundry_service',
-      link: '/laundry/mywash'
+      link: '/mywash'
     },
     {
       title: 'Dashbord',
       caption: '',
       icon: 'grid_view',
-      link: '/laundry/dashboard'
+      link: '/dashboard'
     },
     {
       title: 'Logout',

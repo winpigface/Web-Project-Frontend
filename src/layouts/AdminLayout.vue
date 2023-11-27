@@ -69,26 +69,26 @@ const linksList = [
     title: 'Users',
     caption: '',
     icon: 'perm_identity',
-    link: 'admin'
+    link: ''
 
   },
   {
     title: 'Washing Machine',
     caption: '',
     icon: 'local_laundry_service',
-    link: 'admin/washmachine'
+    link: '/washmachine'
   },
   {
     title: 'Booking',
     caption: '',
     icon: 'task_alt',
-    link: 'admin/booking'
+    link: '/booking'
   },
   {
     title: 'Report',
     caption: '',
     icon: 'record_voice_over',
-    link: 'admin/report'
+    link: '/report'
   },
   {
     title: 'Logout',
