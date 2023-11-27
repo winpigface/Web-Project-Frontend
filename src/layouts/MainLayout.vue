@@ -2,24 +2,27 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
+      
+        <q-btn 
+          type="submit"  
           flat
           dense
           round
-          icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+          @click="toggleLeftDrawer">
+        <img src="../image/animation32.ico" alt="buttonpng" />
+        </q-btn>
+        
 
         <q-toolbar-title>
-          Quasar App
+          Laundry
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Laundry v0.1</div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
+    <!-- <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
@@ -37,7 +40,7 @@
           v-bind="link"
         />
       </q-list>
-    </q-drawer>
+    </q-drawer> -->
 
     <q-page-container>
       <router-view />
@@ -47,13 +50,13 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+// import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
-    icon: 'school',
+    icon: 'search',
     link: 'https://quasar.dev'
   },
   {
@@ -98,7 +101,7 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    
   },
 
   setup () {
