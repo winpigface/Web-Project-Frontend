@@ -57,7 +57,7 @@
       title: 'My Profile',
       caption: '',
       icon: 'account_circle',
-      link: 'https://quasar.dev'
+      link: '/laundry/profile'
     },
     {
       title: 'My wash',

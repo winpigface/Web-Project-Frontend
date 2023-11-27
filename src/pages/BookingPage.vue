@@ -15,11 +15,18 @@
   <div class="">
 
     <div class="box1" >
-      <h1 style="font-size: 30px; font-weight: bold; margin-left: 5%; ">Time user</h1>
+      <!-- <h1 style="font-size: 30px; font-weight: bold; margin-left: 5%; ">Time Table</h1> -->
 
       <div class="q-pa-md" style="" >
-        <q-table  :rows="rows" row-key="name" flat bordered />
+        <q-table
+        title="time used"
+        :columns="columns"
+        :rows="rows"
+        row-key="id"
+        :pagination="paginations"
+        />
       </div>
+
     </div>
 
     <div class="box2" >
@@ -65,7 +72,7 @@
 
 
 
-  <div class="q-pa-md q-gutter-sm text-center" style=" background-color: rgb(59, 144, 255);">
+  <div class="q-pa-md q-gutter-sm text-center" style=" background-color: rgb(59, 144, 255); margin-top: 10% ;">
     <q-btn color="red" icon-right="close" label="Cancel" />
     <q-btn color="secondary"  icon-right="send" label="confirm" />
   </div>
@@ -87,20 +94,28 @@ export default defineComponent({
 
   data() {
     return {
-      rows: [
+      rows: [],
+      columns: [
         {
-          name: "Alif",
-          phone: 123456789,
-          time_from: 12.45,
-          time_to: 13.45,
-          status: "inuse",
+          name: "name",
+          label: "Name",
+          field: "name",
+          align: "left",
+          sortable: true,
         },
         {
-          name: "Arif",
-          phone: 123456789,
-          time_from: 20.3,
-          time_to: 21.5,
-          status: "wait",
+          name: "time_from-to",
+          label: "Time from-to",
+          field: "time_from-to",
+          align: "left",
+          sortable: true,
+        },
+        {
+          name: "status",
+          label: "Status",
+          field: "status",
+          align: "center",
+          sortable: true,
         },
       ],
       model: "one",
@@ -108,6 +123,10 @@ export default defineComponent({
     };
   },
 });
+
+
+
+
 </script>
 
 <style lang="sass" scoped>
