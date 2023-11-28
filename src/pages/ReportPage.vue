@@ -1,5 +1,5 @@
 <template> 
-      <div  class="text-center" style="font-size:30px" >Laundry</div>
+      <div  class="text-center" style="font-size:30px" >{{ this.washing.name}}</div>
 <br/>
       <!-- <div class="text2" style="max-width: 200px">
         
@@ -13,7 +13,7 @@
       
       </textarea> -->
       <textarea class="textarea"
-      v-model="username"
+      v-model="textarea"
   name="textarea"
   rows="5"
   cols="30"
@@ -48,14 +48,14 @@
 >
   <div class=" text-center">
     <q-btn label="Submit Report" type="submit" color="primary"/>
-    
   </div>
 </q-form>
+
    <div class="absolute-top-right">
      <!-- <div class="text-h2">Test Dark mode</div> -->
-     <div class="q-pa-xl">
+     <!-- <div class="q-pa-xl">
        <button @click="changetheme">Change The theme </button>
-     </div>
+     </div> -->
    </div>
    <div class="row flex-center">
      <div class="myownifdark">
@@ -84,49 +84,46 @@
   import { defineComponent } from 'vue'
   import { useWashingMachineStore  } from "../stores/WashingMachine" 
   import { Notify } from 'quasar'
-  
+  import{useLoginUserStore} from "../stores/LoginUser"
   export default defineComponent({
     name: 'ReportPage',
     data(){
       return{
-        storeLogUser:useWashingMachineStore(),
+        storeLogUser:useLoginUserStore(),
+        washing:useWashingMachineStore(),
         textarea: null
       }
     },
     methods:{
-      
       onSubmit(){
+        const headers = {
+        "x-access-token": this.storeLogUser.accessToken
+      }
         const data = {
-          textarea: this.textarea,
+          user_id: this.storeLogUser.userid,
+          washing_machine_id: this.washing.washid,
+          report_log: this.textarea,
         }
         this.$api
-        .post("/auth/login", data)
+        .post("/dashboard/report",data,{headers})
         .then((res)=>{
           if(res.status == 200){
             Notify.create({
               type: "positive",
-              message: "Login sucessfully"
+              message: "Report sucessfully"
             });
-            this.storeLogUser.washid = res.data.id;
-            // this.storeLogUser.fullname = res.data.fullname;
-            // this.storeLogUser.accessToken = res.data.accessToken;
-            if(res.data.img != null){
-              this.storeLogUser.avatar = this.$RESTAPI + "/file/" + res.data.img;
-            }
-            else{
-              this.storeLogUser.avatar = "default-avatar.png";
-            }
-            this.$router.push("/user");
+           
+            this.$router.push("/laundry/dashboard");
           }
         })
         .catch((err)=>{
           console.log(err);
           Notify.create({
             type: "negative",
-            message: "Invalid username or password"
+            message: "Invalid report"
           });
         });
-        this.$refs.loginForm.reset();
+      
       }
     }
   })
@@ -136,9 +133,9 @@
 <!-- SET YOU STYLE IF DARK OR LIGHT THEME ACTIVE -->
  
 <style>
-  .body--light{
-   /* SET YOU THEME IF LIGHT MODE HERE */
-  }
+  /* .body--light{
+   SET YOU THEME IF LIGHT MODE HERE
+  } */
 
   .body--dark{
     background-color: white;

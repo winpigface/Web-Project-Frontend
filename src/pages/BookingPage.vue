@@ -12,27 +12,11 @@
     "
   /> -->
   <!-- table -->
-<<<<<<< HEAD
-  <div class="">
-
-    <div class="box1" >
-      <!-- <h1 style="font-size: 30px; font-weight: bold; margin-left: 5%; ">Time Table</h1> -->
-=======
   <q-page style="background-color: aquamarine;">
     <div class="container">
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
 
     <div class="box1" style="grid-area: table;  background-color: rgb(251,236,204);">
       <div class="q-pa-md" style="" >
-<<<<<<< HEAD
-        <q-table
-        title="time used"
-        :columns="columns"
-        :rows="rows"
-        row-key="id"
-        :pagination="paginations"
-        />
-=======
         <h4 style="margin: 10px; font-weight: bold;">{{ this.storeWash.name }}</h4>
         <q-table  :rows="rows" :columns="columns" row-key="username" :pagination="paginations" bordered>
         <template #body="props">
@@ -52,7 +36,6 @@
           </q-tr>
         </template>
       </q-table>
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
       </div>
 
     </div>
@@ -94,24 +77,10 @@
 
 
     </div>
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-  <div class="q-pa-md q-gutter-sm text-center" style=" background-color: rgb(59, 144, 255); margin-top: 10% ;">
-    <q-btn color="red" icon-right="close" label="Cancel" />
-    <q-btn color="secondary"  icon-right="send" label="confirm" />
-=======
       <div class="btn">
          <q-btn color="red" icon-right="close" label="Cancel"  @click="BacktoDashboard"/>
           <q-btn color="secondary"  icon-right="send" label="Confirm" @click="ConfirmBook"/>
       </div>
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
   </div>
   </q-page>
 </template>
@@ -126,30 +95,6 @@ export default defineComponent({
   name: "BookingPage",
   data() {
     return {
-<<<<<<< HEAD
-      rows: [],
-      columns: [
-        {
-          name: "name",
-          label: "Name",
-          field: "name",
-          align: "left",
-          sortable: true,
-        },
-        {
-          name: "time_from-to",
-          label: "Time from-to",
-          field: "time_from-to",
-          align: "left",
-          sortable: true,
-        },
-        {
-          name: "status",
-          label: "Status",
-          field: "status",
-          align: "center",
-          sortable: true,
-=======
       dataready: false,
       rows: [],
       columns:[
@@ -166,7 +111,6 @@ export default defineComponent({
           field: "book_from",
           align: "left",
           sortable: true,
->>>>>>> 8f3bdf1fb0eefdd5b53383912aec6b533c2aa65d
         },
         {
           name: "book_to",

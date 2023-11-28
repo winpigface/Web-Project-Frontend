@@ -23,7 +23,7 @@
     <q-page-container class="bg-grey-2">
       <q-page padding class="row items-center justify-center" >
         <div class="row full-width" >
-          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm" style=" border: 1px solid black; ">
+          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm" >
             <q-card
               flat
               class="bg-white text-black "
@@ -152,7 +152,7 @@ export default defineComponent({
             this.storeLogUser.role = res.data.role;
             this.storeLogUser.accessToken = res.data.accessToken;
             if (this.storeLogUser.role == "user") {
-              this.$router.push("/laundry/dashbord");
+              this.$router.push("/laundry/dashboard");
             } else if (this.storeLogUser.role == "admin") {
               this.$router.push("/admin");
             }
