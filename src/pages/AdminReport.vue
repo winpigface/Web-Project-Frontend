@@ -150,7 +150,7 @@ export default defineComponent({
         "x-access-token": this.storeLogUser.accessToken
       }
       this.$api
-      .delete('/admin/'+id,{headers})
+      .delete('/admin/report/'+id,{headers})
       .then((res)=>{
         if(res.status == 200){
           Notify.create({

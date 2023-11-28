@@ -25,16 +25,16 @@
       <!-- box1 -->
       <div class="boxShowtime" v-if="this.wash[0].Status == 'wait'">
         <h4 class="text-center" style="font-size: 30px; font-weight: bold; color: #2196F3;"> Until</h4>
-        <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_from }}</h1>
+        <h1 class="text-center" style="font-size: 100px; font-weight: bold; margin: 50px;" >{{ this.wash[0].show_from }}</h1>
       </div>
       <div class="boxShowtime" v-if="this.wash[0].Status == 'inuse'">
         <h4 class="text-center" style="font-size: 30px; font-weight: bold; color: orange;"> Until</h4>
-        <h1 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_to }}</h1>
+        <h1 class="text-center" style="font-size: 100px; font-weight: bold; margin: 50px;" >{{ this.wash[0].show_to }}</h1>
       </div>
       <div class="boxShowtime" v-if="this.wash[0].Status == 'finish'">
-        <h4 class="text-center" style="font-size: 30px; font-weight: bold; color: greenyellow;"> Until</h4>
+        <h4 class="text-center" style="font-size: 30px; font-weight: bold; color: greenyellow;;"> Until</h4>
 
-        <h6 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_deadline  }}</h6>
+        <h1 class="text-center" style="font-size: 100px; font-weight: bold; margin: 50px;" >{{ this.wash[0].show_deadline  }}</h1>
       </div>
       <!-- box2 -->
       <div class="boxButton">
@@ -145,7 +145,7 @@ export default defineComponent({
         "x-access-token": this.storeLogUser.accessToken
       }
       this.$api
-      .delete("/dashboard",{headers})
+      .put("/dashboard/finishwash",{headers})
       .then((res)=>{
         Notify.create({
               type: "positive",
