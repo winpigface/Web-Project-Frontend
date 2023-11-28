@@ -1,18 +1,8 @@
 <template>
       <div  class="text-center" style="font-size:30px" >{{ this.washing.name}}</div>
 <br/>
-      <!-- <div class="text2" style="max-width: 200px">
 
-        <q-select filled v-model="model" :options="options" label="Filled" />
-    </div> -->
-
-
-      <!-- <textarea class="textarea"
-      >
-
-
-      </textarea> -->
-      <textarea class="textarea"
+  <textarea class="textarea"
       v-model="textarea"
   name="textarea"
   rows="5"
@@ -22,23 +12,12 @@
   >
 
 </textarea>
-        <!-- <div class="input-box" style="max-width: 300px">
-    <q-input
-      v-model="text"
-      filled
-      type="textarea2"
-    />
-  </div> -->
+
 
 
 
 <br/>
-    <!-- <div class="text-center " >
-    <q-btn label="Submit report" color="primary" @click="seamless = true" />
-    <q-dialog v-model="seamless" seamless position="bottom">
-    </q-dialog>
 
-  </div> -->
 
 
 <q-form
@@ -51,17 +30,8 @@
   </div>
 </q-form>
 
-   <div class="absolute-top-right">
-     <!-- <div class="text-h2">Test Dark mode</div> -->
-     <!-- <div class="q-pa-xl">
-       <button @click="changetheme">Change The theme </button>
-     </div> -->
-   </div>
-   <div class="row flex-center">
-     <div class="myownifdark">
 
-     </div>
-   </div>
+
    <!-- <div class="row">
      {{$q.dark.isActive ? " Dark" : "LIGHT"}}
    </div> -->
