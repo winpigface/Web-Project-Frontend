@@ -34,7 +34,7 @@
       <div class="boxShowtime" v-if="this.wash[0].Status == 'finish'">
         <h4 class="text-center" style="font-size: 30px; font-weight: bold; color: greenyellow;"> Until</h4>
 
-        <h6 class="text-center" style="font-size: 30px; font-weight: bold;" >{{ this.wash[0].show_deadline  }}</h6>
+        <h6 class="text-center" style="font-size: 100px; font-weight: bold;" >{{ this.wash[0].show_deadline  }}</h6>
       </div>
       <!-- box2 -->
       <div class="boxButton">

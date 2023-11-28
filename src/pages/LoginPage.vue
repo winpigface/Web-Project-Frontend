@@ -1,12 +1,4 @@
 <template>
-  <!-- <img src="../image/backgound v.2.png" alt=""
-    style="pointer-events: none;
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           z-index: -1;
-           margin-top: 1000px;"> -->
-
   <q-layout view="hHh Lpr lFf">
     <img
       src="../image/backgound v.2.png"

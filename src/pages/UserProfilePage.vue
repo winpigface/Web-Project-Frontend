@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center " style="background-color: #74dde4;">
     <div >
       <q-icon name="account_circle" size="100px"/>
     </div>
