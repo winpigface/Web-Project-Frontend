@@ -1,12 +1,4 @@
 <template>
-  <!-- <img src="../image/backgound v.2.png" alt=""
-    style="pointer-events: none;
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           z-index: -1;
-           margin-top: 1000px;"> -->
-
   <q-layout view="hHh Lpr lFf">
     <img
       src="../image/backgound v.2.png"
@@ -23,7 +15,7 @@
     <q-page-container class="bg-grey-2">
       <q-page padding class="row items-center justify-center" >
         <div class="row full-width" >
-          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm" >
+          <div class="col-md-8 offset-md-2 col-xs-12 q-pl-md q-pr-md q-pt-sm">
             <q-card
               flat
               class="bg-white text-black "
@@ -102,7 +94,7 @@
                       </div>
                       <div>
                         You don't have an account yet?
-                        <a href="/signup">create a new account</a>
+                        <router-link to="/signup">create a new account</router-link>
                       </div>
                     </q-form>
                   </div>
@@ -170,6 +162,4 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
 
-</style>

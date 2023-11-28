@@ -1,18 +1,7 @@
 <template >
-  <!-- <img
-    src="../image/backgound v.2.png"
-    alt=""
-    style="
-      pointer-events: none;
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      filter: blur(5px);
-      margin-left: -2px;
-    "
-  /> -->
+
   <!-- table -->
-  <q-page style="background-color: aquamarine;">
+  <q-page style="background-color: #74dde4;">
     <div class="container">
 
     <div class="box1" style="grid-area: table;  background-color: rgb(251,236,204);">
@@ -146,7 +135,6 @@ export default defineComponent({
         .get('/dashboard/'+this.storeWash.washid,{headers})
         .then((res)=>{
           if(res.status == 200){
-            console.log(res.data);
             console.log(this.storeWash.washid);
           this.rows = res.data
         }
@@ -177,12 +165,14 @@ export default defineComponent({
         }
       })
       .catch((err)=>{
+        console.log(this.storeLogUser.getAccessToken);
+        console.log(err);
         ErrorHandle(err.response.status,err,this.$router)
       })
 
     },
     BacktoDashboard(){
-      this.$router.push('/laundry/dashbord')
+      this.$router.push('/laundry/dashboard')
     }
   },
   async mounted() {

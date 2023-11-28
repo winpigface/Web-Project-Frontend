@@ -16,8 +16,8 @@
         <q-toolbar-title>
           Admin Dashboard
         </q-toolbar-title>
-        <div v-if="storeLogUser.getUserid">
-          Hello {{ storeLogUser.getUsername }}
+        <div v-if="storeLogUser.getUserid" style="text-decoration: none; color: wheat; font-size: 20px; font-weight: bold;">
+          {{ storeLogUser.getUsername }}
         </div>
       </q-toolbar>
     </q-header>
@@ -45,7 +45,7 @@
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
-          @click="onDel(link.title)"
+          @click="onPath(link.title,link.link)"
         />
     </q-list>
 
@@ -63,32 +63,32 @@
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 import { useLoginUserStore } from "src/stores/LoginUser";
-
+import { Notify } from 'quasar';
 const linksList = [
   {
     title: 'Users',
     caption: '',
     icon: 'perm_identity',
-    link: 'admin'
+    link: '/'
 
   },
   {
     title: 'Washing Machine',
     caption: '',
     icon: 'local_laundry_service',
-    link: 'admin/washmachine'
+    link: '/washmachine'
   },
   {
     title: 'Booking',
     caption: '',
     icon: 'task_alt',
-    link: 'admin/booking'
+    link: '/booking'
   },
   {
     title: 'Report',
     caption: '',
     icon: 'record_voice_over',
-    link: 'admin/report'
+    link: '/report'
   },
   {
     title: 'Logout',
@@ -116,14 +116,16 @@ export default defineComponent({
     }
   },
   methods:{
-    onDel(link){
-      if(link == 'Logout'){
+    onPath(name,link){
+      if(name == 'Logout'){
         this.storeLogUser.clearStorage();
         Notify.create({
         type: "info",
         message: "Logout successfully"
       });
+      this.$router.push('/')
       }
+      else this.$router.push('/admin'+link)
     }
   }
 

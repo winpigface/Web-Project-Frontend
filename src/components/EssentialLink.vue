@@ -1,11 +1,10 @@
 <template>
-  <q-item
-    clickable
-    tag="a"
-    target=""
-    :href="link"
+
+
+   <q-item
+   clickable
   >
-    <q-item-section
+   <q-item-section
       v-if="icon"
       avatar
     >
@@ -17,6 +16,9 @@
       <q-item-label caption>{{ caption }}</q-item-label>
     </q-item-section>
   </q-item>
+
+
+
 </template>
 
 <script>
@@ -44,6 +46,6 @@ export default defineComponent({
       type: String,
       default: ''
     }
-  }
+  },
 })
 </script>

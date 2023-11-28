@@ -90,15 +90,16 @@ export default defineComponent({
       })
       .catch((err)=>{
         ErrorHandle(err.response.status,err,this.$router)
-
       }
 
       )
     },
     onBook(id,name){
+
       this.storeWash.washid = id
       this.storeWash.name = name
       this.$router.push('/laundry/booking')
+
     },
     onReport(id,name){
       this.storeWash.washid = id
@@ -113,7 +114,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .page{
-  background-color: aquamarine;
+  background-color: #74dde4;
 }
 </style>
 

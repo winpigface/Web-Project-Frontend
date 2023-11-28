@@ -1,5 +1,5 @@
 <template>
-  <q-page padding class="text-center">
+  <q-page padding class="text-center " style="background-color: #74dde4;">
     <div >
       <q-icon name="account_circle" size="100px"/>
     </div>
@@ -22,6 +22,7 @@
 import { defineComponent } from 'vue'
 import { useLoginUserStore } from 'src/stores/LoginUser';
 import { Notify } from 'quasar';
+import { ErrorHandle } from 'src/utils/ErrorHandle';
 export default defineComponent({
   name: 'UserProfilePage',
   data(){
@@ -54,12 +55,7 @@ export default defineComponent({
           }
       })
       .catch((err)=>{
-        Notify.create({
-              type: "negative",
-              message: "Error Updated user ID: " + err.message,
-            });
-            console.log(id+username+phone);
-
+        ErrorHandle(err.response.status,err,this.$router)
       })
     },
 

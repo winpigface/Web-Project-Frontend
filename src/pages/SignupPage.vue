@@ -141,6 +141,7 @@
 <script>
 import { defineComponent } from "vue";
 import { Notify } from "quasar";
+import { ErrorHandle } from "src/utils/ErrorHandle";
 export default defineComponent({
   naem: "SignupPage",
   data() {
