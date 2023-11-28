@@ -31,6 +31,10 @@ const routes = [
         path: "/laundry/time",
         component: () => import("pages/time.vue"),
       },
+      {
+        path: "/laundry/report",
+        component: () => import("pages/ReportPage.vue"),
+      },
     ],
   },
   {
