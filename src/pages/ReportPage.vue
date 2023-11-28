@@ -1,16 +1,16 @@
-<template> 
+<template>
       <div  class="text-center" style="font-size:30px" >{{ this.washing.name}}</div>
 <br/>
       <!-- <div class="text2" style="max-width: 200px">
-        
+
         <q-select filled v-model="model" :options="options" label="Filled" />
     </div> -->
-    
-    
+
+
       <!-- <textarea class="textarea"
-      > 
-        
-      
+      >
+
+
       </textarea> -->
       <textarea class="textarea"
       v-model="textarea"
@@ -20,7 +20,7 @@
   placeholder="type someyhing..."
   :rules="[requiredValidate]"
   >
-  
+
 </textarea>
         <!-- <div class="input-box" style="max-width: 300px">
     <q-input
@@ -29,9 +29,9 @@
       type="textarea2"
     />
   </div> -->
-        
-        
-    
+
+
+
 <br/>
     <!-- <div class="text-center " >
     <q-btn label="Submit report" color="primary" @click="seamless = true" />
@@ -39,7 +39,7 @@
     </q-dialog>
 
   </div> -->
-  
+
 
 <q-form
   @submit="onSubmit"
@@ -66,23 +66,23 @@
      {{$q.dark.isActive ? " Dark" : "LIGHT"}}
    </div> -->
 
-   
+
    <!-- <q-toggle
-   
+
     v-model="selection"
     label ="orange"
     false-value ="off"
     true-value ="true"
    /> -->
-  
-   
-  
+
+
+
 
   </template>
-  
+
   <script>
   import { defineComponent } from 'vue'
-  import { useWashingMachineStore  } from "../stores/WashingMachine" 
+  import { useWashingMachineStore  } from "../stores/WashingMachine"
   import { Notify } from 'quasar'
   import{useLoginUserStore} from "../stores/LoginUser"
   export default defineComponent({
@@ -112,7 +112,7 @@
               type: "positive",
               message: "Report sucessfully"
             });
-           
+
             this.$router.push("/laundry/dashboard");
           }
         })
@@ -120,18 +120,18 @@
           console.log(err);
           Notify.create({
             type: "negative",
-            message: "Invalid report"
+            message: err.message
           });
         });
-      
+
       }
     }
   })
   </script>
-  
- 
+
+
 <!-- SET YOU STYLE IF DARK OR LIGHT THEME ACTIVE -->
- 
+
 <style>
   /* .body--light{
    SET YOU THEME IF LIGHT MODE HERE
@@ -161,10 +161,6 @@
 
 
 </style>
-  
-    
-  
-  
 
 
 
@@ -174,19 +170,23 @@
 
 
 
-<!-- <script 
+
+
+
+
+<!-- <script
   setup>
-  
- 
+
+
   import {watch} from 'vue'
   import {useQuasar} from 'quasar'
   import { ref } from 'vue'
 
   const $q = useQuasar()
- 
+
   function changetheme(){
     $q.dark.toggle()
- 
+
   }
 
   watch(()=> $q.dark.isActive,val=>{
@@ -194,8 +194,8 @@
   })
     const textarea2 = ref(null)
     const accept = ref(false)
-  
-  
-  
+
+
+
 </script>
   -->
